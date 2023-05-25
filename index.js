@@ -7,7 +7,14 @@ const port = 8000;
 const expressLayouts=require('express-ejs-layouts');
 //set up database
 const db=require('./config/mongoose');
+//for set up cookies
+const cookieParser= require('cookie-parser');
 
+
+//for handling post req
+app.use(express.urlencoded());
+
+app.use(cookieParser());
 //include assets
 app.use(express.static('./assets'));
 
