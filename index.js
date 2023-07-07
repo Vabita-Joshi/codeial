@@ -7,6 +7,13 @@ const port = 8000;
 const expressLayouts=require('express-ejs-layouts');
 //set up database
 const db=require('./config/mongoose');
+
+//for passport.js
+const session=require('express-session');
+// const passport=require('passport');
+// const passportLocal=require('./config/passport-local-stratergy')
+
+
 //for set up cookies
 const cookieParser= require('cookie-parser');
 
@@ -29,6 +36,23 @@ app.set('layout extractScripts', true);
 app.use('/', require('./routes'));
 app.set('view engine','ejs');
 app.set('views','./views'); 
+
+//for passport.js
+// app.use(session({
+//     name: 'codial',
+//     //todo change scret before deployment
+//     secret:'changed',
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {
+//         maxAge: (1000 * 60 * 100)
+//     }}
+
+// ));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+
 
 
 app.listen(port, function(err){
