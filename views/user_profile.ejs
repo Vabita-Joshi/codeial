@@ -1,7 +1,22 @@
 
     <h1>user profile page</h1>
     <hr><br>
-   name: <%= user.name %>
+    <!-- Make sure the src attribute points to the correct avatar URL -->
+<img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+
+    <% if(user.id == profile_user.id){%>
+            <form action="/users/update/<%= profile_user.id%>"  enctype="multipart/form-data" method="post">
+                <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name%>" required>
+                <input type="email" name="email" placeholder="Your email" value="<%= profile_user.email%>" required>
+                <input type="file" name="avatar" placeholder="Profile Picture">
+                <input type="submit" value="Update">
+            </form>
+            </form>
+    <%}else{ %>
+        
+   name: <%= profile_user.name %>
    <br>
-   email: <%= user.email %>
+   email: <%= profile_user.email %>
    <hr><br>
+    <% }%>
+

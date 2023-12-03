@@ -4,15 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title> 
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Noty -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <link rel="stylesheet" href="/css/chat.css">
     <link rel="stylesheet" href="/css/layout.css">
     <%= style %>
 </head>
 <body>
     <%- include('_header');%> 
+    <% if(flash.success && flash.success.length>0){ %>
+        <h5>
+            <%= flash.success%>
+        </h5>
+        <%}%>
     <%- body %>
-   <%- include('_footer');%> 
+
+    <!-- //chat box -->
     
-    <%= script%>
+
+
+   <%= script %>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const successMessage = "<%- flash.success %>";
+        const errorMessage = "<%- flash.error %>";
+
+        if (successMessage.length > 0) {
+            new Noty({
+                theme: 'relax',
+                text: successMessage,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+        }
+
+        if (errorMessage.length > 0) {
+            new Noty({
+                theme: 'relax',
+                text: errorMessage,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+        }
+    });
+</script>
 </body>
 </html>
