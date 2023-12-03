@@ -9,11 +9,7 @@ passport.use(new LocalStrategy({
 },
     function(email,password,done){
 //find a user and establish indenetiy
-        User.findOne({email: email}, function(err,user){
-            if(err){
-                console.log('error in finding u ser using passport');
-                    return done(err);
-            }
+        const user=User.findOne({email: email});
             if(!user || user.password != password ){
                 console.log("invalid username or password");
                 return(null, false);
@@ -21,8 +17,8 @@ passport.use(new LocalStrategy({
             return (done,user);
 
         })
-    }
-))
+    
+)
 
 //serialize the user to decide which key is to kept in cookies
 passport.serializeUser(function(user,done){
@@ -32,10 +28,7 @@ passport.serializeUser(function(user,done){
 
 //deserialize the user from key in cookies
 passport.deserializeUser(function(id,done){
-    User.findById(id,function(err,user){
-        console.log("error in finnddig user");
-        return done(err);
-    })
+    const user=User.findById(id);
     return done(null,user);
 })
 
